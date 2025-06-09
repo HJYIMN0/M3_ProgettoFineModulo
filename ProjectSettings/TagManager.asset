@@ -13,9 +13,9 @@ TagManager:
   - Bullet
   - Water
   - UI
+  - 
+  - Ground
   - Player
-  - 
-  - 
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2664829555
+    locked: 0
+  - name: Tree
+    uniqueID: 3237624845
     locked: 0
