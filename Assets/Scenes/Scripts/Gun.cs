@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Gun : MonoBehaviour
+{
+    
+    [SerializeField] private Bullet _bullet;
+    [SerializeField] private GameObject _player;
+
+    private GameObject[] _enemies;
+    [SerializeField] private float _maxRange =20f;
+    [SerializeField] private float _fireRate = 1f;
+
+    private float _timer;
+
+
+    void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        if (_player == null)
+        {
+            Debug.LogWarning("Something is not right!");
+        }
+        _timer = 0;
+    }   
+    void Update()
+    {
+        _timer += Time.deltaTime;
+        Shoot();
+        //Debug.Log(FindNearestEnemy());
+    }
+
+    public GameObject FindNearestEnemy()
+    {
+        _enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (_enemies == null) return null;
+        if (_enemies.Length == 0) return null;
+        else
+        {
+            GameObject nearestEnemy = _enemies[0];
+            for (int i = 1; i < _enemies.Length; i++)
+            {
+                if (nearestEnemy.transform.position.magnitude - _player.transform.position.magnitude > _enemies[i].transform.position.magnitude - _player.transform.position.magnitude)
+                {
+                    nearestEnemy = _enemies[i];
+                }
+            }
+            return nearestEnemy;
+        }
+    }
+
+    public void Shoot()
+    {
+        if (_player == null) return;
+        GameObject enemy = FindNearestEnemy();
+        if (enemy == null)
+        {
+            Debug.LogWarning("Non ci sono Enemies in scena!");
+            return;
+        }
+        else
+        {
+            if (Vector2.Distance(enemy.transform.position, _player.transform.position) < _maxRange)
+            {
+                Debug.Log(enemy.transform.position.magnitude);
+                Debug.Log(_maxRange);
+                if (_timer > _fireRate)
+                {
+                    Instantiate(_bullet);
+                    _timer = 0;
+                }
+            }
+        }
+    }
+}
