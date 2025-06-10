@@ -23,8 +23,8 @@ public class LifeController : MonoBehaviour
         if (_hp <= 0) 
         {
             _player.enabled = false;
-            Destroy(gameObject, 1f);
-            _isAlive = false;            
+            _isAlive = false;
+            Destroy(gameObject, 1f);                       
         }  
     }
 

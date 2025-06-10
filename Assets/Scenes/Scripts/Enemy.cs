@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _dmg = 1;
     [SerializeField] private float _maxDistance = 15f;
 
+    private bool _isAttacking = false;
+
 
     private Vector2 _direction;
     private Vector2 _pos;
@@ -63,5 +65,35 @@ public class Enemy : MonoBehaviour
     }
 
     public int GetDmg() => _dmg;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision == null) return;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+             _isAttacking = true;          
+        }       
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision == null) return;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _isAttacking = true;
+        }
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision == null) return;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+          _isAttacking = false;
+        }
+    }
+
+    public bool IsAttacking() => _isAttacking;
 
 }
