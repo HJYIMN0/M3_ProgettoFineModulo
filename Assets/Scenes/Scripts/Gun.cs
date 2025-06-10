@@ -23,12 +23,17 @@ public class Gun : MonoBehaviour
             Debug.LogWarning("Something is not right!");
         }
         _timer = 0;
-    }   
+    }
     void Update()
     {
         _timer += Time.deltaTime;
-        Shoot();
-        //Debug.Log(FindNearestEnemy());
+
+        if (_timer > _fireRate)
+        {
+            Debug.Log(_timer);
+            Shoot();
+            _timer = 0;
+        }
     }
 
     public GameObject FindNearestEnemy()
@@ -41,7 +46,7 @@ public class Gun : MonoBehaviour
             GameObject nearestEnemy = _enemies[0];
             for (int i = 1; i < _enemies.Length; i++)
             {
-                if (nearestEnemy.transform.position.magnitude - _player.transform.position.magnitude > _enemies[i].transform.position.magnitude - _player.transform.position.magnitude)
+                if (Vector2.Distance(nearestEnemy.transform.position, _player.transform.position) > Vector2.Distance(_enemies[i].transform.position, _player.transform.position))
                 {
                     nearestEnemy = _enemies[i];
                 }
@@ -54,6 +59,7 @@ public class Gun : MonoBehaviour
     {
         if (_player == null) return;
         GameObject enemy = FindNearestEnemy();
+        Debug.Log(enemy.name);
         if (enemy == null)
         {
             Debug.LogWarning("Non ci sono Enemies in scena!");
@@ -63,12 +69,12 @@ public class Gun : MonoBehaviour
         {
             if (Vector2.Distance(enemy.transform.position, _player.transform.position) < _maxRange)
             {
-                Debug.Log(enemy.transform.position.magnitude);
-                Debug.Log(_maxRange);
+                //Debug.Log(enemy.transform.position.magnitude);
+                //Debug.Log(_maxRange);
                 if (_timer > _fireRate)
                 {
-                    Instantiate(_bullet);
-                    _timer = 0;
+                  Debug.Log("Imma fire!");
+                  Instantiate(_bullet);                    
                 }
             }
         }

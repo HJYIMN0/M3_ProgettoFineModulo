@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Collider2D _collider;
     [SerializeField] private float _speed = 4f;
     [SerializeField] private int _dmg = 1;
+    [SerializeField] private float _maxDistance = 15f;
 
 
     private Vector2 _direction;
@@ -39,8 +40,11 @@ public class Enemy : MonoBehaviour
         {
             if (_player != null)
             {
-                _pos = transform.position;
-                _direction = (_player.transform.position - transform.position).normalized;
+                if (Vector2.Distance(_player.transform.position, transform.position) < _maxDistance)
+                {
+                    _pos = transform.position;
+                    _direction = (_player.transform.position - transform.position).normalized;
+                }
             }
             else 
             {

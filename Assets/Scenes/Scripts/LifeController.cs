@@ -13,6 +13,7 @@ public class LifeController : MonoBehaviour
     void Awake()
     {
         _player = GetComponent<PlayerController>();
+        if (_player != null) return;
         
     }
 
@@ -21,9 +22,9 @@ public class LifeController : MonoBehaviour
     {
         if (_hp <= 0) 
         {
-            Destroy(gameObject, 1f);
-            _isAlive = false;
             _player.enabled = false;
+            Destroy(gameObject, 1f);
+            _isAlive = false;            
         }  
     }
 

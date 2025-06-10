@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        if (_player == null) Debug.Log("Errore! Neesun Player in scena!");       
+        if (_player == null) Debug.Log("Errore! Neesun Player in scena!");     
         
     }
 
