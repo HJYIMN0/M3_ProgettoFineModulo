@@ -22,10 +22,16 @@ public class LifeController : MonoBehaviour
     {
         if (_hp <= 0) 
         {
-            _player.enabled = false;
-            _isAlive = false;
-            Destroy(gameObject, 1f);                       
-        }  
+            if (_player != null)
+            {
+                _player.enabled = false;
+                _isAlive = false;
+                Destroy(gameObject, 1f);
+            }
+
+            else Destroy(gameObject);
+        }
+        
     }
 
     public void TakeDamage(int dmg)

@@ -35,7 +35,7 @@ public class EnemyAudioController : MonoBehaviour
     {
          int _randomNumber = Random.Range(0, 4);
 
-        if (_enemy.IsAttacking() == true)
+        if (_enemy.IsAttacking() == true || _enemy.GetComponent<LifeController>().GetHP() <= 0)
         {
             _playingSound.clip = _audioList[_randomNumber];
             _playingSound.Play();

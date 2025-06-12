@@ -30,7 +30,7 @@ public class Gun : MonoBehaviour
 
         if (_timer > _fireRate)
         {
-            Debug.Log(_timer);
+            //Debug.Log(_timer);
             Shoot();
             _timer = 0;
         }
@@ -59,18 +59,18 @@ public class Gun : MonoBehaviour
     {
         if (_player == null) return;
         GameObject enemy = FindNearestEnemy();
-        Debug.Log(enemy.name);
         if (enemy == null)
         {
             Debug.LogWarning("Non ci sono Enemies in scena!");
             return;
-        }
+        }                
         else
         {
+            Debug.Log(enemy.name);
+            Debug.Log(Vector2.Distance(enemy.transform.position, _player.transform.position));
             if (Vector2.Distance(enemy.transform.position, _player.transform.position) < _maxRange)
-            {
-                //Debug.Log(enemy.transform.position.magnitude);
-                //Debug.Log(_maxRange);
+            {                
+                Debug.Log(_maxRange);
                 if (_timer > _fireRate)
                 {
                   Debug.Log("Imma fire!");

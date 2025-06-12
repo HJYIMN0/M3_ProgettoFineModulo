@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bullet: {fileID: -1615260828420789269, guid: 27d9df88b465d4940b66584af7b5d1e3, type: 3}
   _player: {fileID: 0}
-  _maxRange: 25
+  _maxRange: 6
   _fireRate: 1

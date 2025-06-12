@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
             {
                 if (Vector2.Distance(_player.transform.position, transform.position) < _maxDistance)
                 {
+                    //Debug.Log(Vector2.Distance(_player.transform.position, transform.position));
                     _pos = transform.position;
                     _direction = (_player.transform.position - transform.position).normalized;
                 }
